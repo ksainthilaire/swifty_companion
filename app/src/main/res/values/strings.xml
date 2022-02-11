@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">swifty-companion</string>
+    <string name="empty"></string>
+
+    <string name="api_url">https://api.intra.42.fr</string>
+    <string name="api_secret">d622d2216b2d59e8ed20a0f0ff656a751db5abb666f34fa750af9a70d9ae2ca3</string>
+    <string name="api_uid">90552fdb65d07dc0eb4f8acccb0376a1d21a8ee358464adebec697ec6462bcf1</string>
+
+    <string name="sign_in_with_42">S\'authentifier avec 42</string>
+
+    <string name="search">Rechercher...</string>
+    <string name="pagination">Page</string>
+
+    <string name="hello_blank_fragment">test</string>
+
+    <string name="skills_tab_item">Compétences</string>
+    <string name="projects_tab_item">Projets</string>
+    <string name="corrections_tab_item">Corrections</string>
+
+    <string name="ic_logout_description">Se déconnecter</string>
+    <string name="ic_logo_description">Logo</string>
+    <string name="ic_avatar_description">Avatar</string>
+    <string name="ic_back_description">Retour</string>
+    <string name="ic_search_description">Rechercher</string>
+    <string name="ic_cross_description">Annuler</string>
+    <string name="ic_double_top_description">En haut</string>
+    <string name="ic_double_down_description">En bas</string>
+    <string name="ic_navigate_previous_description">Précédent</string>
+    <string name="ic_navigate_next_description">Suivant</string>
+</resources>
