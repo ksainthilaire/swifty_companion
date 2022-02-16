@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ksainthi.swifty.databinding.FragmentProfileBinding
 import com.ksainthi.swifty.viewmodels.User
 import kotlinx.coroutines.*
@@ -15,11 +16,24 @@ import kotlinx.coroutines.*
 class FragmentProfile(val user: User) : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
+    private var tabTitle = arrayOf("Compétences", "Projets", "Corrections")
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+
+        val supportFragmentManager = (activity as MainActivity).supportFragmentManager
+
+        binding.viewPager2.adapter = ViewAdapter(supportFragmentManager, lifecycle)
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) {
+            tab, position ->
+                tab.text = tabTitle[position]
+        }.attach()
+
 
         binding.user = user
         loadPicture(user)

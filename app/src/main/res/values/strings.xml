@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">swifty-companion</string>
+    <string name="app_name">swifty_companion</string>
     <string name="empty"></string>
 
     <string name="api_url">https://api.intra.42.fr</string>

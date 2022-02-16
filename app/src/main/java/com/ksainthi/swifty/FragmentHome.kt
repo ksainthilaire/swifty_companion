@@ -32,7 +32,6 @@ class FragmentHome : Fragment() {
            }
            parentActivity.displayProfile(user)
        } catch (e: ClientRequestException) {
-           Log.d("TAG", "Introubable")
            displayError("L'utilisateur $login n'existe pas!")
        }
 

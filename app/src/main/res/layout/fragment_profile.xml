@@ -30,13 +30,10 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar"
                     android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_height="170dp"
-                    app:shapeAppearanceOverlay="@style/imageViewRounded"
-                     />
-
-                <!-- Avatar -->
+                    app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
                 <ProgressBar
                     android:id="@+id/experience"
@@ -78,55 +75,69 @@
             </LinearLayout>
 
 
-
-        <LinearLayout
-            android:id="@+id/tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <LinearLayout
+                android:id="@+id/tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/user_tag_bg"
-                    android:padding="10dp"
-                    android:text="@{user.wallet+` ₳`}" />
-            </LinearLayout>
+                    android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/user_tag_bg"
+                        android:padding="10dp"
+                        android:text="@{user.wallet+` ₳`}" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/user_tag_bg"
-                    android:padding="10dp"
-                    android:text="42cursus" />
-            </LinearLayout>
+                    android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/user_tag_bg"
+                        android:padding="10dp"
+                        android:text="42cursus" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/user_tag_bg"
-                    android:padding="10dp"
-                    android:text="115 ₳" />
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/user_tag_bg"
+                        android:padding="10dp"
+                        android:text="115 ₳" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
+            <com.google.android.material.tabs.TabLayout
+                app:tabTextAppearance="@style/ProfileTabLayout"
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
-    </LinearLayout>
+
+
     </LinearLayout>
 
 </layout>

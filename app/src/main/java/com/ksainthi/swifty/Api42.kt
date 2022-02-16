@@ -43,6 +43,7 @@ object Api42 {
         if (accessToken == null) {
             initWithToken()
         }
+        Log.d("TAG", "accessToken() = $accessToken")
 
         val response: HttpResponse = client.request(urlString) {
 
