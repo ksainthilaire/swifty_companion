@@ -1,6 +1,7 @@
 package    com.ksainthi.swifty
 
-import androidx.annotation.Keep
+
+import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.features.json.*
@@ -8,42 +9,29 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.coroutines.*
-import kotlinx.serialization.*
-import java.lang.System.exit
+import com.ksainthi.swifty.viewmodels.*
 
 
 object Api42 {
-    @Keep
-    @Serializable
-    data class Token(
-        @SerialName("access_token") val accessToken: String,
-        @SerialName("token_type") val tokenType: String,
-        @SerialName("expires_in") val expiresIn: Int,
-        @SerialName("scope") val scope: String,
-        @SerialName("created_at") val createdAt: Int
-    )
 
-
-    @Keep
-    @Serializable
-    data class User(
-        @SerialName("id") val id: Int,
-        @SerialName("email") val email: String,
-        @SerialName("login") val login: String? = null,
-        @SerialName("first_name") val firstName: String? = null,
-        @SerialName("last_name") val lastName: String? = null,
-
-    )
-
-    private val API_URL: String = "https://api.intra.42.fr"
-    private val API_SECRET: String =
+    private const val API_URL: String = "https://api.intra.42.fr"
+    private const val API_SECRET: String =
         "d622d2216b2d59e8ed20a0f0ff656a751db5abb666f34fa750af9a70d9ae2ca3"
-    private val API_UID: String = "90552fdb65d07dc0eb4f8acccb0376a1d21a8ee358464adebec697ec6462bcf1"
+    private const val API_UID: String = "90552fdb65d07dc0eb4f8acccb0376a1d21a8ee358464adebec697ec6462bcf1"
+
+    private var client: HttpClient = HttpClient {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            })
+        }
+    }
 
     private var accessToken: String? = null
 
-    suspend fun requestAPI(
+    private suspend fun requestAPI(
         requestMethod: HttpMethod,
         path: String,
         params: MutableMap<String, String>?
@@ -51,14 +39,9 @@ object Api42 {
 
         val urlString = API_URL
             .plus(path)
-        val client: HttpClient = HttpClient() {
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                    prettyPrint = true
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                })
-            }
+
+        if (accessToken == null) {
+            initWithToken()
         }
 
         val response: HttpResponse = client.request(urlString) {
@@ -70,35 +53,35 @@ object Api42 {
             }
 
             headers {
-                accessToken?.let {
-                    println(it)
-                    append(HttpHeaders.Authorization, "Bearer $it")
-                }
+                append(HttpHeaders.Authorization, "Bearer $accessToken")
             }
         }
         return response
     }
 
 
-    suspend fun getToken(): Token {
-        val params: MutableMap<String, String> = HashMap()
+    private suspend fun initWithToken() {
 
-        params["grant_type"] = "client_credentials";
-        params["client_secret"] = API_SECRET;
-        params["client_id"] = API_UID;
-
-
-        val response = requestAPI(HttpMethod.Post, "/oauth/token", params);
+        val response: HttpResponse = client.post(API_URL.plus("/oauth/token")) {
+            parameter("grant_type", "client_credentials")
+            parameter("client_secret", API_SECRET)
+            parameter("client_id", API_UID)
+        }
         val token: Token = response.receive()
-
+        Log.d("TAG", "Le token est ${token.accessToken}")
         accessToken = token.accessToken
-        return token
     }
 
     suspend fun getUser(login: String): User {
+        Log.d("getUser()", "getUser()")
         val response: HttpResponse = requestAPI(HttpMethod.Get, "/v2/users/$login", null)
+        Log.d("Retour(1)", "Retour()Hello")
         val user: User = response.receive()
+        Log.d("Retour()", user.toString())
         return user
     }
+
+
+
 
 }
