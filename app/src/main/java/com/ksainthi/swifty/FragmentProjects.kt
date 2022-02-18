@@ -1,59 +1,138 @@
 package com.ksainthi.swifty
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginRight
+import androidx.core.view.setPadding
+import com.ksainthi.swifty.viewmodels.ProjectUser
+import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentProjects.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentProjects : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_projects, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_projects, container, false)
+
+
+        val projects: Array<ProjectUser> =
+            arguments?.getParcelableArray("projects") as Array<ProjectUser>
+
+
+        val scrollView = rootView.findViewById<ScrollView>(R.id.fragmentProjects)
+        val linearLayout = LinearLayout(context)
+        linearLayout.setLayoutParams(
+            LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
+        linearLayout.setOrientation(LinearLayout.VERTICAL)
+        for (projectUser in projects) {
+
+
+            val row = LinearLayout(context)
+            row.setLayoutParams(
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+            row.setOrientation(LinearLayout.HORIZONTAL)
+            row.setPadding(10)
+
+            val textView = TextView(context)
+            textView.setText("${projectUser.project?.name}")
+            textView.setLayoutParams(
+                TableLayout.LayoutParams(
+                    TableLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, 1f
+                    )
+                )
+            )
+
+            val colWrapper = LinearLayout(context)
+            colWrapper.setLayoutParams(
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+            colWrapper.setOrientation(LinearLayout.HORIZONTAL)
+
+            val wrapperImageView = LinearLayout(context)
+            wrapperImageView.setLayoutParams(
+                TableLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+            )
+            wrapperImageView.setOrientation(LinearLayout.HORIZONTAL)
+           
+
+            val imageView = ImageView(context)
+            imageView.setLayoutParams(
+                TableLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+
+
+            var color = ContextCompat.getColor(requireContext(), R.color.green)
+            var drawable = R.drawable.ic_success
+
+            if (projectUser.isValidated == null || projectUser.isValidated == false) {
+                color = ContextCompat.getColor(requireContext(), R.color.red)
+                drawable = R.drawable.ic_failure
+            }
+
+
+            imageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), drawable))
+
+            val finalMark = TextView(context)
+            finalMark.setLayoutParams(
+                TableLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+            )
+            finalMark.setPadding(20, 0, 0, 0)
+            finalMark.setText(projectUser.finalMark)
+
+
+            finalMark.setTextColor(color)
+
+            wrapperImageView.addView(imageView)
+
+
+            colWrapper.addView(wrapperImageView)
+            colWrapper.addView(finalMark)
+
+
+
+
+
+            row.addView(textView)
+            row.addView(colWrapper)
+            linearLayout.addView(row)
+
+        }
+        scrollView.addView(linearLayout)
+        return rootView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentProjects.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentProjects().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

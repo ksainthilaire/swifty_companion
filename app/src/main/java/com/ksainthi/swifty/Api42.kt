@@ -74,15 +74,18 @@ object Api42 {
     }
 
     suspend fun getUser(login: String): User {
-        Log.d("getUser()", "getUser()")
         val response: HttpResponse = requestAPI(HttpMethod.Get, "/v2/users/$login", null)
-        Log.d("Retour(1)", "Retour()Hello")
         val user: User = response.receive()
-        Log.d("Retour()", user.toString())
+
         return user
     }
 
+    suspend fun getCorrectionPointHistorics(login: String) : CorrectionPointHistory {
+        val response: HttpResponse =
+            requestAPI(HttpMethod.Get, " /v2/users/$login/correction_point_historics", null)
 
-
+        val history: CorrectionPointHistory = response.receive()
+        return history
+    }
 
 }

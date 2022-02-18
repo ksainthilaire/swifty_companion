@@ -34,9 +34,7 @@ class FragmentHome : Fragment() {
        } catch (e: ClientRequestException) {
            displayError("L'utilisateur $login n'existe pas!")
        }
-
     }
-
 
     fun onEnterSearchUser() {
         val username = binding.inputSearch.query.toString()
@@ -77,9 +75,6 @@ class FragmentHome : Fragment() {
             }
         })
         binding.lifecycleOwner = viewLifecycleOwner
-        /*
-        n case you might be experiencing this issue with LiveData, you might've forgotten to set lifecycle owner of your binding; binding.setLifecycleOwner(lifecycleOwner)
-         */
         return binding.root
     }
 

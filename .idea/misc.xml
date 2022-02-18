@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable-hdpi/user_names_bg.xml" value="0.101" />
+        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/alert.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/circle_shape.xml" value="0.1375" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/circular_progress_bar.xml" value="0.1375" />
@@ -15,14 +16,17 @@
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_image_1.xml" value="0.2703125" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_navigate_next.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_navigate_previous.xml" value="0.1" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_search.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/ic_success.xml" value="0.1" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/logo.xml" value="1.1" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/round_avatar.xml" value="0.536" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/drawable/rounded_edittext.xml" value="0.536" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_corrections.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_profile.xml" value="0.152" />
+        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_no_cursus.xml" value="0.14479166666666668" />
+        <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_profile.xml" value="0.536" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_profile_page_adapter.xml" value="0.1234375" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_projects.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/ksain/AndroidStudioProjects/swiftycompanion/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />

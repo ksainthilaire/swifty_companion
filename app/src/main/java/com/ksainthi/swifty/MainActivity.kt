@@ -34,13 +34,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
 
-
-
-
     fun displayProfile(user: User) {
 
-        currentFragment = FragmentProfile(user)
+        currentFragment = FragmentProfile()
 
+        val params = Bundle()
+        params.putParcelable("user", user)
+
+        currentFragment.setArguments(params)
         displayFragment(R.id.topbar, FragmentTopbar())
         displayFragment(R.id.fragment, currentFragment)
     }

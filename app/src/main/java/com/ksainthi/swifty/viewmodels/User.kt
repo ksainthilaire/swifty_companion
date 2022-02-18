@@ -1,47 +1,55 @@
 package com.ksainthi.swifty.viewmodels
 
+import android.os.Parcelable
 import androidx.annotation.Keep
+import androidx.versionedparcelable.ParcelField
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Keep
 @Serializable
+@Parcelize
 data class Cursus(
     val id: Int,
     val name: String,
     val slug: String
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class SkillUser(
     val id: Int,
     val name: String,
     val level: Float
-)
+) : Parcelable
 
 
 @Keep
 @Serializable
+@Parcelize
 data class CursusUser(
     val id: Int,
-    @SerialName("grade") val grade: String,
+    @SerialName("grade") val grade: String? = null,
     @SerialName("level") val level: Float,
     @SerialName("skills") val skills: Array<SkillUser>,
     @SerialName("cursus_id") val cursusId: Int,
     val cursus: Cursus
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class Project(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String
-)
+) : Parcelable
 
 @Keep
 @Serializable
+@Parcelize
 data class ProjectUser(
     @SerialName("id") val id: Int,
     @SerialName("occurrence") val occurrence: Int,
@@ -51,16 +59,42 @@ data class ProjectUser(
     @SerialName("current_team_id") val currentTeamId: Int? = null,
     @SerialName("project") val project: Project? = null,
     @SerialName("cursus_ids") val cursusIds: Array<Int>,
-)
+) : Parcelable
 
 @Keep
 @Serializable
-class User(
+@Parcelize
+data class User(
     @SerialName("id") val id: Int,
     @SerialName("login") val login: String? = null,
     @SerialName("first_name") val firstName: String? = null,
     @SerialName("last_name") val lastName: String? = null,
     @SerialName("wallet") val wallet: Int,
     @SerialName("image_url") val imageUrl: String? = null,
-    @SerialName("projects_users") val projectsUsers: Array<ProjectUser>
-)
+    @SerialName("projects_users") val projectsUsers: Array<ProjectUser>,
+    @SerialName("cursus_users") val cursusUsers: Array<CursusUser>
+) : Parcelable {
+
+    fun getCursusByName(name: String): CursusUser? {
+        for (cursusUser in cursusUsers) {
+            if (name == cursusUser.cursus.name)
+                return cursusUser
+        }
+        return cursusUsers.get(0)
+    }
+
+    fun getCursusNames(): Array<String> {
+        return cursusUsers.map { cursusUser -> cursusUser.cursus.name }.toTypedArray()
+    }
+
+    fun getProjects(cursusId: Int, isValidated: Boolean? = null): Array<ProjectUser> {
+        return projectsUsers.filter { projectUser ->
+            projectUser.cursusIds.contains(cursusId) && projectUser.status == "finished"
+        }.toTypedArray()
+    }
+
+    fun getSkills(cursusId: Int) : Array<SkillUser> {
+        return cursusUsers.filter { cursusUser -> cursusUser.cursusId == cursusId }
+            .map { cursusUser -> cursusUser.skills }.first()
+    }
+}
