@@ -80,6 +80,15 @@ object Api42 {
         return user
     }
 
+    suspend fun getUsersByCursus(cursus: String, page: Int = 0): Array<UserSummary> {
+        val params = mutableMapOf("page[number]" to page.toString())
+        val response: HttpResponse =
+            requestAPI(HttpMethod.Get, "/v2/cursus/${cursus}/users", params)
+        val users: Array<UserSummary> = response.receive()
+
+        return users
+    }
+
     suspend fun getCorrectionPointHistorics(login: String) : CorrectionPointHistory {
         val response: HttpResponse =
             requestAPI(HttpMethod.Get, " /v2/users/$login/correction_point_historics", null)

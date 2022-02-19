@@ -1,6 +1,7 @@
 package com.ksainthi.swifty.viewmodels
 
 import android.os.Parcelable
+import android.util.Log
 import androidx.annotation.Keep
 import androidx.versionedparcelable.ParcelField
 import kotlinx.parcelize.Parcelize
@@ -37,14 +38,21 @@ data class CursusUser(
     @SerialName("skills") val skills: Array<SkillUser>,
     @SerialName("cursus_id") val cursusId: Int,
     val cursus: Cursus
-) : Parcelable
+) : Parcelable {
+
+    fun getUserLevel(): String {
+        Log.d("TAG", "le level est ${level}")
+        return level.toString()
+    }
+}
 
 @Keep
 @Serializable
 @Parcelize
 data class Project(
     @SerialName("id") val id: Int,
-    @SerialName("name") val name: String
+    @SerialName("name") val name: String,
+    @SerialName("parent_id") val parentId: Int? = null
 ) : Parcelable
 
 @Keep
@@ -72,7 +80,8 @@ data class User(
     @SerialName("wallet") val wallet: Int,
     @SerialName("image_url") val imageUrl: String? = null,
     @SerialName("projects_users") val projectsUsers: Array<ProjectUser>,
-    @SerialName("cursus_users") val cursusUsers: Array<CursusUser>
+    @SerialName("cursus_users") val cursusUsers: Array<CursusUser>,
+    @SerialName("correction_point") val correctionPoint: Int
 ) : Parcelable {
 
     fun getCursusByName(name: String): CursusUser? {
@@ -87,9 +96,23 @@ data class User(
         return cursusUsers.map { cursusUser -> cursusUser.cursus.name }.toTypedArray()
     }
 
-    fun getProjects(cursusId: Int, isValidated: Boolean? = null): Array<ProjectUser> {
+    fun getParentProjects(cursusId: Int): Array<ProjectUser> {
+        return this.getProjects(cursusId)
+            .filter { projectUser ->
+                projectUser.project != null && projectUser.project.parentId == null }.toTypedArray()
+    }
+
+    fun getChildProjects(cursusId: Int, parentId: Int): Array<ProjectUser> {
+        return this.getProjects(cursusId)
+            .filter { projectUser -> projectUser.project != null }
+            .filter { projectUser -> projectUser.project?.parentId == parentId}
+            .toTypedArray()
+    }
+
+    fun getProjects(cursusId: Int): Array<ProjectUser> {
         return projectsUsers.filter { projectUser ->
-            projectUser.cursusIds.contains(cursusId) && projectUser.status == "finished"
+            projectUser.cursusIds.contains(cursusId) && (projectUser.status == "finished"
+                    || projectUser.status == "parent")
         }.toTypedArray()
     }
 
@@ -98,3 +121,14 @@ data class User(
             .map { cursusUser -> cursusUser.skills }.first()
     }
 }
+
+
+@Keep
+@Serializable
+@Parcelize
+data class UserSummary(
+    @SerialName("id") val id: Int,
+    @SerialName("login") val login: String? = null,
+    @SerialName("image_url") val imageUrl: String? = null,
+    @SerialName("new_image_url") val newImageUrl: String? = null
+) : Parcelable

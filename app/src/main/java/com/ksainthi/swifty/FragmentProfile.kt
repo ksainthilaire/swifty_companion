@@ -20,10 +20,10 @@ import kotlinx.coroutines.*
 class FragmentProfile() : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     lateinit var user: User
-    var cursus: CursusUser? = null
+    lateinit var cursus: CursusUser
 
 
-    private var tabTitle = arrayOf("Compétences", "Projets", "Corrections")
+    private var tabTitle = arrayOf("Compétences", "Projets")
 
 
     override fun onCreateView(
@@ -32,14 +32,25 @@ class FragmentProfile() : Fragment() {
     ): View {
 
         user = arguments?.getParcelable<User>("user")!!
-        cursus = user.getCursusByName("42cursus")
+        cursus = user.getCursusByName("42cursus")!!
+
+
+
+        println("${cursus}")
+        Log.d("TAG", "cursus->${cursus.level}")
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         val supportFragmentManager = (activity as MainActivity).supportFragmentManager
 
+
+        this.updateUserExp()
+
+
+
+
         binding.viewPager2.adapter =
-            UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!)
+            UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!.cursusId)
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = tabTitle[position]
@@ -72,20 +83,20 @@ class FragmentProfile() : Fragment() {
                 id: Long
             ) {
 
-                val currentItem = binding.viewPager2.getCurrentItem()
                 val cursusName = (view as TextView).getText().toString()
-                cursus = user.getCursusByName(cursusName)
-                binding.viewPager2.adapter = UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!)
-                //binding.viewPager2.adapter?.notifyItemChanged(currentItem)
-            }
+                cursus = user.getCursusByName(cursusName)!!
+                updateUserExp()
+                binding.setCursus(cursus)
+                binding.viewPager2.adapter = UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!.cursusId)
+           }
         }
 
-        binding.cursusSpinnerWrapper.addView(spinner)
-        binding.cursusSpinnerWrapper
+        binding.cursusSpinnerWrapper.addView(spinner, 0)
 
 
         loadPicture(user)
         binding.user = user
+        binding.cursus = cursus
         return binding.root
     }
 
@@ -98,4 +109,11 @@ class FragmentProfile() : Fragment() {
         }
     }
 
+    fun updateUserExp() {
+        val skillStartLvl = cursus.level.toInt()
+        val skillExpCurrentLvl = ((cursus.level - skillStartLvl) * 100).toInt()
+
+        binding.experience.setProgress(skillExpCurrentLvl)
+        binding.experience.setMax(100)
+    }
 }

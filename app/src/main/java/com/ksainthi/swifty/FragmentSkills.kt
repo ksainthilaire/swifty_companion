@@ -32,8 +32,11 @@ class FragmentSkills : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val rootView = inflater.inflate(R.layout.fragment_skills, container, false)
-        val skills: Array<SkillUser> =
-            arguments?.getParcelableArray("skills") as Array<SkillUser>
+
+        val user: User = arguments?.getParcelable<User>("user")!!
+        val cursusId: Int = arguments?.getInt("cursus_id")!!
+
+        val skills: Array<SkillUser> = user.getSkills(cursusId)
 
         val scrollView = rootView.findViewById<ScrollView>(R.id.fragmentSkills)
         val linearLayout = LinearLayout(context)

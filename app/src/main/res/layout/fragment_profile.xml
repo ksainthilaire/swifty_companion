@@ -7,6 +7,9 @@
         <variable
             name="user"
             type="com.ksainthi.swifty.viewmodels.User" />
+        <variable
+            name="cursus"
+            type="com.ksainthi.swifty.viewmodels.CursusUser" />
     </data>
 
     <LinearLayout
@@ -31,8 +34,7 @@
                     android:id="@+id/avatar"
                     android:layout_width="170dp"
                     android:layout_height="170dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
                     app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
                 <ProgressBar
@@ -54,7 +56,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/user_names_bg"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -71,6 +73,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{user.login}"
+                    android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/cursusLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`Niv. `+cursus.level}"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -98,8 +106,18 @@
                     android:id="@+id/cursusSpinnerWrapper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/user_tag_bg"
+                    android:layout_marginTop="10dp"
+                    android:paddingRight="10dp"
+                   >
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_display"
+                        />
 
                 </LinearLayout>
 
@@ -113,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/user_tag_bg"
                         android:padding="10dp"
-                        android:text="115 ₳" />
+                        android:text="@{user.correctionPoint+` ⛅`}" />
                 </LinearLayout>
 
 

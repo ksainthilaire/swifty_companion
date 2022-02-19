@@ -16,56 +16,32 @@ class UserViewAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
     val user: User,
-    var cursus: CursusUser
+    var cursusId: Int
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
 
-
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
 
-    fun updateCursus(newCursus: CursusUser, currentItem: Int) {
-        cursus = newCursus
+    fun updateCursus(newCursusId: Int, currentItem: Int) {
+        cursusId = newCursusId
         notifyItemChanged(currentItem)
     }
 
-
     override fun createFragment(position: Int): Fragment {
 
-        cursus ?: run {
-            return FragmentNoCursus()
+        val args = Bundle()
+        args.putParcelable("user", user)
+        args.putInt("cursus_id", cursusId)
+
+        val fragment = when (position) {
+            0 -> FragmentSkills()
+            else -> FragmentProjects()
         }
 
-        return when (position) {
-            0 -> {
-
-                val fragment = FragmentSkills()
-                val params = Bundle()
-                val skills: Array<SkillUser> = user.getSkills(cursus.cursusId)
-
-                params.putParcelableArray("skills", skills)
-                fragment.setArguments(params)
-                return fragment
-            }
-            1 -> {
-
-                val fragment = FragmentProjects()
-                val params = Bundle()
-                val projects: Array<ProjectUser> = user.getProjects(cursus.cursusId)
-                params.putParcelableArray("projects", projects)
-
-                fragment.setArguments(params)
-                return fragment
-            }
-            else -> {
-
-                return FragmentCorrections()
-            }
-
-        }
-
-
+        fragment.setArguments(args)
+        return fragment
     }
 }
