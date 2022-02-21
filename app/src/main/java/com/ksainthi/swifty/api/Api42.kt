@@ -10,9 +10,7 @@ class Api42 {
     private lateinit var service: Api42Service
     var accessToken: String? = null
     set(token) {
-
         field = "Bearer ".plus(token)
-        println("Le token est $field")
     }
 
     fun getService(): Api42Service {

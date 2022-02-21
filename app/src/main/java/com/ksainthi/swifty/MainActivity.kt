@@ -2,7 +2,6 @@ package com.ksainthi.swifty
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.ksainthi.swifty.api.Api42
 import com.ksainthi.swifty.dialogs.LoadingDialog
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     fun loadApiToken() {
-        Log.d("TAG","Requête en cours")
+
         api42Client.getService().login(Constants.API_42_SECRET, Constants.API_42_UID)
             .enqueue(object :
                 Callback<Token> {
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     if (response.code() == 200) {
                         val token = response.body()
-                        Log.d("TAG", "Le token est ${token}")
+
                         token?.let {
                             api42Client.accessToken = it.accessToken
                             displayHome()
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 }
 
                 override fun onFailure(call: Call<Token>, throwable: Throwable?) {
-                    println("Impossible de charger le token")
+
                 }
 
             })
