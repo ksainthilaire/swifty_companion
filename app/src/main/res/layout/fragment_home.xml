@@ -13,7 +13,7 @@
 
         <variable
             name="fragment"
-            type="com.ksainthi.swifty.FragmentHome" />
+            type="com.ksainthi.swifty.fragments.FragmentHome" />
     </data>
 
     <LinearLayout
@@ -34,10 +34,6 @@
                 android:id="@+id/first_avatar"
                 android:layout_width="83dp"
                 android:layout_height="68dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="88dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
@@ -46,11 +42,11 @@
                 android:id="@+id/first_avatar5"
                 android:layout_width="54dp"
                 android:layout_height="46dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="128dp"
+
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="100dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_avatar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
@@ -58,23 +54,21 @@
                 android:id="@+id/first_avatar3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="56dp"
+                android:layout_marginTop="100dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/first_avatar"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/first_avatar4"
                 android:layout_width="74dp"
                 android:layout_height="70dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="164dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="25dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_avatar3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
@@ -82,10 +76,9 @@
                 android:id="@+id/first_avatar6"
                 android:layout_width="83dp"
                 android:layout_height="68dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="256dp"
-                android:layout_marginTop="88dp"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintLeft_toRightOf="@id/first_avatar4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
@@ -94,10 +87,9 @@
                 android:id="@+id/first_avatar2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="148dp"
+                android:layout_marginTop="84dp"
+                app:layout_constraintLeft_toRightOf="@+id/first_avatar6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/imageViewRounded" />
@@ -147,6 +139,8 @@
                 android:gravity="center"
                 android:iconifiedByDefault="false"
                 android:queryBackground="@null"
+                android:searchSuggestAuthority="com.ksainthi.swifty.SearchSuggestionProvider"
+                android:searchSuggestSelection=" ?"
                 android:queryHint="@string/search" />
 
 

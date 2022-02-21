@@ -2,17 +2,6 @@
     <string name="app_name">swifty_companion</string>
     <string name="empty"></string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
     <string name="api_url">https://api.intra.42.fr</string>
     <string name="api_secret">d622d2216b2d59e8ed20a0f0ff656a751db5abb666f34fa750af9a70d9ae2ca3</string>
     <string name="api_uid">90552fdb65d07dc0eb4f8acccb0376a1d21a8ee358464adebec697ec6462bcf1</string>

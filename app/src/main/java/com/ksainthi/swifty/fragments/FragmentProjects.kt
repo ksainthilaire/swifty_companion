@@ -1,8 +1,6 @@
-package com.ksainthi.swifty
+package com.ksainthi.swifty.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,15 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.core.view.marginRight
-import androidx.core.view.marginTop
 import androidx.core.view.setPadding
-import com.ksainthi.swifty.viewmodels.Cursus
-import com.ksainthi.swifty.viewmodels.CursusUser
+import com.ksainthi.swifty.R
 import com.ksainthi.swifty.viewmodels.ProjectUser
 import com.ksainthi.swifty.viewmodels.User
-import java.util.ArrayList
 
 class FragmentProjects : Fragment() {
 
@@ -32,7 +25,7 @@ class FragmentProjects : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_projects, container, false)
 
-        user = arguments?.getParcelable<User>("user")!!
+        user = arguments?.getParcelable("user")!!
         cursusId = arguments?.getInt("cursus_id")!!
 
 
@@ -45,21 +38,21 @@ class FragmentProjects : Fragment() {
         return rootView
     }
 
-    fun createProjectLayout(project: ProjectUser, isParent: Boolean = false): LinearLayout {
+    private fun createProjectLayout(project: ProjectUser, isParent: Boolean = false): LinearLayout {
 
         val row = LinearLayout(context)
-        row.setLayoutParams(
+        row.layoutParams = (
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         )
-        row.setOrientation(LinearLayout.HORIZONTAL)
+        row.orientation = (LinearLayout.HORIZONTAL)
         row.setPadding(10)
 
 
         val projectName = LinearLayout(context)
-        projectName.setLayoutParams(
+        projectName.layoutParams = (
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -68,11 +61,11 @@ class FragmentProjects : Fragment() {
                 gravity = Gravity.CENTER_HORIZONTAL
             }
         )
-        projectName.setOrientation(LinearLayout.HORIZONTAL)
+        projectName.orientation = (LinearLayout.HORIZONTAL)
 
         val textView = TextView(context)
-        textView.setText("${project.project?.name}")
-        textView.setLayoutParams(
+        textView.text = ("${project.project?.name}")
+        textView.layoutParams = (
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -89,7 +82,7 @@ class FragmentProjects : Fragment() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             layoutParams.setMargins(20, 15, 0, 0)
-            arrow.setLayoutParams(layoutParams)
+            arrow.layoutParams = (layoutParams)
 
             arrow.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -102,27 +95,27 @@ class FragmentProjects : Fragment() {
         }
 
         val colWrapper = LinearLayout(context)
-        colWrapper.setLayoutParams(
+        colWrapper.layoutParams = (
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         )
-        colWrapper.setOrientation(LinearLayout.HORIZONTAL)
+        colWrapper.orientation = (LinearLayout.HORIZONTAL)
 
         val wrapperImageView = LinearLayout(context)
-        wrapperImageView.setLayoutParams(
+        wrapperImageView.layoutParams = (
             TableLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 1f
             )
         )
-        wrapperImageView.setOrientation(LinearLayout.HORIZONTAL)
+        wrapperImageView.orientation = (LinearLayout.HORIZONTAL)
 
 
         val imageView = ImageView(context)
-        imageView.setLayoutParams(
+        imageView.layoutParams = (
             TableLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -142,7 +135,7 @@ class FragmentProjects : Fragment() {
          imageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), drawable))
 
         val finalMark = TextView(context)
-        finalMark.setLayoutParams(
+        finalMark.layoutParams = (
             TableLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -150,7 +143,7 @@ class FragmentProjects : Fragment() {
             )
         )
         finalMark.setPadding(20, 0, 0, 0)
-        finalMark.setText(project.finalMark)
+        finalMark.text = (project.finalMark)
 
 
         finalMark.setTextColor(color)
@@ -170,16 +163,16 @@ class FragmentProjects : Fragment() {
         return row
     }
 
-    fun createProjectsLayout(projects: Array<ProjectUser>): LinearLayout {
+    private fun createProjectsLayout(projects: Array<ProjectUser>): LinearLayout {
         val linearLayout = LinearLayout(context)
 
-        linearLayout.setLayoutParams(
+        linearLayout.layoutParams = (
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         )
-        linearLayout.setOrientation(LinearLayout.VERTICAL)
+        linearLayout.orientation = (LinearLayout.VERTICAL)
 
         for (project in projects) {
 
@@ -194,20 +187,20 @@ class FragmentProjects : Fragment() {
 
 
                 val subProject = LinearLayout(context)
-                subProject.setLayoutParams(
+                subProject.layoutParams = (
                     LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                     )
                 )
-                subProject.setOrientation(LinearLayout.VERTICAL)
-                subProject.setVisibility(View.GONE)
+                subProject.orientation = (LinearLayout.VERTICAL)
+                subProject.visibility = (View.GONE)
 
                 parentProject.setOnClickListener {
-                   if (subProject.getVisibility() == View.GONE) {
-                       subProject.setVisibility(View.VISIBLE)
+                   if (subProject.visibility == View.GONE) {
+                       subProject.visibility = (View.VISIBLE)
                    }
-                    else subProject.setVisibility(View.GONE)
+                    else subProject.visibility = (View.GONE)
                 }
 
                 for (childProject in childProjects) {

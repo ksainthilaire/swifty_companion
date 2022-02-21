@@ -1,7 +1,6 @@
-package com.ksainthi.swifty
+package com.ksainthi.swifty.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ksainthi.swifty.MainActivity
+import com.ksainthi.swifty.R
+import com.ksainthi.swifty.UserViewAdapter
 import com.ksainthi.swifty.databinding.FragmentProfileBinding
 import com.ksainthi.swifty.viewmodels.CursusUser
 import com.ksainthi.swifty.viewmodels.User
 import kotlinx.coroutines.*
 
 
-class FragmentProfile() : Fragment() {
+class FragmentProfile : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     lateinit var user: User
     lateinit var cursus: CursusUser
@@ -31,13 +33,10 @@ class FragmentProfile() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        user = arguments?.getParcelable<User>("user")!!
-        cursus = user.getCursusByName("42cursus")!!
+        user = arguments?.getParcelable("user")!!
+        cursus = user.getCursusByName("42cursus")
 
 
-
-        println("${cursus}")
-        Log.d("TAG", "cursus->${cursus.level}")
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
@@ -50,7 +49,7 @@ class FragmentProfile() : Fragment() {
 
 
         binding.viewPager2.adapter =
-            UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!.cursusId)
+            UserViewAdapter(supportFragmentManager, lifecycle, user, cursus.cursusId)
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = tabTitle[position]
@@ -62,9 +61,9 @@ class FragmentProfile() : Fragment() {
             80,
             1f
         )
-        spinner.setBackground(
+        spinner.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.user_tag_bg)
-        )
+
 
         val cursusNames = user.getCursusNames()
         val arrayAdapter =
@@ -83,12 +82,13 @@ class FragmentProfile() : Fragment() {
                 id: Long
             ) {
 
-                val cursusName = (view as TextView).getText().toString()
-                cursus = user.getCursusByName(cursusName)!!
+                val cursusName = (view as TextView).text.toString()
+                cursus = user.getCursusByName(cursusName)
                 updateUserExp()
-                binding.setCursus(cursus)
-                binding.viewPager2.adapter = UserViewAdapter(supportFragmentManager, lifecycle, user, cursus!!.cursusId)
-           }
+                binding.cursus = cursus
+                binding.viewPager2.adapter =
+                    UserViewAdapter(supportFragmentManager, lifecycle, user, cursus.cursusId)
+            }
         }
 
         binding.cursusSpinnerWrapper.addView(spinner, 0)
@@ -100,7 +100,7 @@ class FragmentProfile() : Fragment() {
         return binding.root
     }
 
-    fun loadPicture(user: User) = CoroutineScope(Dispatchers.Main).launch {
+    private fun loadPicture(user: User) = CoroutineScope(Dispatchers.Main).launch {
 
         context?.let {
             Glide.with(it)
@@ -113,7 +113,7 @@ class FragmentProfile() : Fragment() {
         val skillStartLvl = cursus.level.toInt()
         val skillExpCurrentLvl = ((cursus.level - skillStartLvl) * 100).toInt()
 
-        binding.experience.setProgress(skillExpCurrentLvl)
-        binding.experience.setMax(100)
+        binding.experience.progress = skillExpCurrentLvl
+        binding.experience.max = 100
     }
 }

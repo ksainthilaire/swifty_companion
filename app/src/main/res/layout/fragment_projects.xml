@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:scrollbars="none"
-    tools:context=".FragmentProjects">
+    tools:context=".fragments.FragmentProjects">
 
 
 </ScrollView>

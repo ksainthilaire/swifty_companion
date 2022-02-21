@@ -1,16 +1,13 @@
 package com.ksainthi.swifty
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ksainthi.swifty.viewmodels.CursusUser
-import com.ksainthi.swifty.viewmodels.ProjectUser
-import com.ksainthi.swifty.viewmodels.SkillUser
+import com.ksainthi.swifty.fragments.FragmentProjects
+import com.ksainthi.swifty.fragments.FragmentSkills
 import com.ksainthi.swifty.viewmodels.User
-import java.util.ArrayList
 
 class UserViewAdapter(
     fragmentManager: FragmentManager,
@@ -25,11 +22,6 @@ class UserViewAdapter(
         return 2
     }
 
-    fun updateCursus(newCursusId: Int, currentItem: Int) {
-        cursusId = newCursusId
-        notifyItemChanged(currentItem)
-    }
-
     override fun createFragment(position: Int): Fragment {
 
         val args = Bundle()
@@ -41,7 +33,7 @@ class UserViewAdapter(
             else -> FragmentProjects()
         }
 
-        fragment.setArguments(args)
+        fragment.arguments = args
         return fragment
     }
 }
