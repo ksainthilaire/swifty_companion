@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentHome">
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.ksainthi.swifty.presentation.fragments.FragmentHome"
+        android:label="FragmentHome"
+        android:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentProfile"
+            app:destination="@id/fragmentProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.ksainthi.swifty.presentation.fragments.FragmentProfile"
+        android:label="FragmentProfile"
+        android:layout="@layout/fragment_profile">
+        <argument
+            android:name="login"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -5,11 +5,9 @@
     <data>
 
         <variable
-            name="user"
-            type="com.ksainthi.swifty.viewmodels.User" />
-        <variable
-            name="cursus"
-            type="com.ksainthi.swifty.viewmodels.CursusUser" />
+            name="viewModel"
+            type="com.ksainthi.swifty.presentation.viewmodels.ProfileViewModel"></variable>
+
     </data>
 
     <LinearLayout
@@ -38,7 +36,7 @@
                     app:shapeAppearanceOverlay="@style/imageViewRounded" />
 
                 <ProgressBar
-                    android:id="@+id/experience"
+                    android:id="@+id/levelPercent"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
@@ -62,23 +60,23 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/firstName"
+                    android:id="@+id/fullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{user.lastName+` `+user.firstName}"
+                    android:text="@{viewModel.user.fullName}"
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/lastName"
+                    android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{user.login}"
+                    android:text="@{viewModel.user.login}"
                     android:textColor="@color/white" />
                 <TextView
                     android:id="@+id/cursusLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{`Niv. `+cursus.level}"
+                    android:text="@{`Niv. `+viewModel.user.level}"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -95,11 +93,12 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/wallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/user_tag_bg"
                         android:padding="10dp"
-                        android:text="@{user.wallet+` ₳`}" />
+                        android:text="@{viewModel.user.wallet+` ₳`}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,12 +111,19 @@
                     android:layout_marginTop="10dp"
                     android:paddingRight="10dp"
                    >
+                    
+                    <Spinner
+                        android:id="@+id/cursusSpinner"
+                        android:background="@drawable/user_tag_bg"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:selectedItemPosition="@={viewModel.selectedCursus}"
+                        android:layout_weight="1"></Spinner>
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_display"
-                        />
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_display" />
 
                 </LinearLayout>
 
@@ -127,11 +133,12 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/correctionPoints"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/user_tag_bg"
                         android:padding="10dp"
-                        android:text="@{user.correctionPoint+` ⛅`}" />
+                        android:text="@{` ⛅`}" />
                 </LinearLayout>
 
 

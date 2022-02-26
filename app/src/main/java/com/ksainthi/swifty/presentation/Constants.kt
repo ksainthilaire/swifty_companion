@@ -1,4 +1,4 @@
-package com.ksainthi.swifty
+package com.ksainthi.swifty.presentation
 
 object Constants {
 

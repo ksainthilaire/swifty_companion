@@ -1,34 +1,21 @@
-package com.ksainthi.swifty.viewmodels
+package com.ksainthi.swifty.data.model
 
-import android.os.Parcelable
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
-
-@Keep
-@Serializable
-@Parcelize
 data class Cursus(
     val id: Int,
     val name: String,
     val slug: String
-) : Parcelable
+)
 
-@Keep
-@Serializable
-@Parcelize
+
 data class SkillUser(
     val id: Int,
     val name: String,
     val level: Float
-) : Parcelable
+)
 
 
-@Keep
-@Serializable
-@Parcelize
 data class CursusUser(
     val id: Int,
     @SerializedName("grade") val grade: String? = null,
@@ -36,7 +23,7 @@ data class CursusUser(
     @SerializedName("skills") val skills: Array<SkillUser>,
     @SerializedName("cursus_id") val cursusId: Int,
     val cursus: Cursus
-) : Parcelable {
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -64,18 +51,14 @@ data class CursusUser(
     }
 }
 
-@Keep
-@Serializable
-@Parcelize
+
 data class Project(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("parent_id") val parentId: Int? = null
-) : Parcelable
+)
 
-@Keep
-@Serializable
-@Parcelize
+
 data class ProjectUser(
     @SerializedName("id") val id: Int,
     @SerializedName("occurrence") val occurrence: Int,
@@ -85,7 +68,7 @@ data class ProjectUser(
     @SerializedName("current_team_id") val currentTeamId: Int? = null,
     @SerializedName("project") val project: Project? = null,
     @SerializedName("cursus_ids") val cursusIds: Array<Int>,
-) : Parcelable {
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -117,43 +100,41 @@ data class ProjectUser(
     }
 }
 
-@Keep
-@Serializable
-@Parcelize
-data class User(
+data class UserResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("login") val login: String? = null,
     @SerializedName("first_name") val firstName: String? = null,
     @SerializedName("last_name") val lastName: String? = null,
     @SerializedName("wallet") val wallet: Int,
     @SerializedName("image_url") val imageUrl: String? = null,
-    @SerializedName("projects_users") val projectsUsers: Array<ProjectUser>,
-    @SerializedName("cursus_users") val cursusUsers: Array<CursusUser>,
+   @SerializedName("projects_users") val projectsUsers: List<ProjectUser>,
+    val cursus_users: List<CursusUser>,
     @SerializedName("correction_point") val correctionPoint: Int
-) : Parcelable {
+) {
 
     fun getCursusByName(name: String): CursusUser {
-        for (cursusUser in cursusUsers) {
+        for (cursusUser in cursus_users) {
             if (name == cursusUser.cursus.name)
                 return cursusUser
         }
-        return cursusUsers.first()
+        return cursus_users.first()
     }
 
     fun getCursusNames(): Array<String> {
-        return cursusUsers.map { cursusUser -> cursusUser.cursus.name }.toTypedArray()
+        return cursus_users.map { cursusUser -> cursusUser.cursus.name }.toTypedArray()
     }
 
     fun getParentProjects(cursusId: Int): Array<ProjectUser> {
         return this.getProjects(cursusId)
             .filter { projectUser ->
-                projectUser.project != null && projectUser.project.parentId == null }.toTypedArray()
+                projectUser.project != null && projectUser.project.parentId == null
+            }.toTypedArray()
     }
 
     fun getChildProjects(cursusId: Int, parentId: Int): Array<ProjectUser> {
         return this.getProjects(cursusId)
             .filter { projectUser -> projectUser.project != null }
-            .filter { projectUser -> projectUser.project?.parentId == parentId}
+            .filter { projectUser -> projectUser.project?.parentId == parentId }
             .toTypedArray()
     }
 
@@ -165,40 +146,12 @@ data class User(
         }.toTypedArray()
     }
 
-    fun getSkills(cursusId: Int) : Array<SkillUser> {
-        return cursusUsers.filter { cursusUser -> cursusUser.cursusId == cursusId }
+    fun getSkills(cursusId: Int): Array<SkillUser> {
+        return cursus_users.filter { cursusUser -> cursusUser.cursusId == cursusId }
             .map { cursusUser -> cursusUser.skills }.first()
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as User
-
-        if (id != other.id) return false
-        if (login != other.login) return false
-        if (firstName != other.firstName) return false
-        if (lastName != other.lastName) return false
-        if (wallet != other.wallet) return false
-        if (imageUrl != other.imageUrl) return false
-        if (!projectsUsers.contentEquals(other.projectsUsers)) return false
-        if (!cursusUsers.contentEquals(other.cursusUsers)) return false
-        if (correctionPoint != other.correctionPoint) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + (login?.hashCode() ?: 0)
-        result = 31 * result + (firstName?.hashCode() ?: 0)
-        result = 31 * result + (lastName?.hashCode() ?: 0)
-        result = 31 * result + wallet
-        result = 31 * result + (imageUrl?.hashCode() ?: 0)
-        result = 31 * result + projectsUsers.contentHashCode()
-        result = 31 * result + cursusUsers.contentHashCode()
-        result = 31 * result + correctionPoint
-        return result
-    }
 }
+
+
+data class UserPicturesResponse(private val users: List<UserResponse>)

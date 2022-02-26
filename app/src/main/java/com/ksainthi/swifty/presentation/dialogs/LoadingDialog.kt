@@ -1,4 +1,4 @@
-package com.ksainthi.swifty.dialogs
+package com.ksainthi.swifty.presentation.dialogs
 
 import android.app.Activity
 import android.view.LayoutInflater

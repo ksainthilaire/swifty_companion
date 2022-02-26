@@ -1,39 +1,39 @@
-package com.ksainthi.swifty
+package com.ksainthi.swifty.presentation.adapter
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ksainthi.swifty.fragments.FragmentProjects
-import com.ksainthi.swifty.fragments.FragmentSkills
-import com.ksainthi.swifty.viewmodels.User
+import com.ksainthi.swifty.domain.model.Cursus
+import com.ksainthi.swifty.domain.model.User
+import com.ksainthi.swifty.presentation.fragments.FragmentProjects
+import com.ksainthi.swifty.presentation.fragments.FragmentSkills
 
-class UserViewAdapter(
+
+class ProfileViewAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
-    val user: User,
-    var cursusId: Int
+    val cursus: Cursus
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
 
-    override fun getItemCount(): Int {
-        return 2
-    }
+    override fun getItemCount(): Int { return 2 }
 
     override fun createFragment(position: Int): Fragment {
 
-        val args = Bundle()
-        args.putParcelable("user", user)
-        args.putInt("cursus_id", cursusId)
+        val params = Bundle()
+        params.putParcelable("cursus", cursus)
+
 
         val fragment = when (position) {
             0 -> FragmentSkills()
             else -> FragmentProjects()
         }
 
-        fragment.arguments = args
+        fragment.arguments = params
         return fragment
     }
 }

@@ -8,12 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="searchError"
-            type="com.ksainthi.swifty.viewmodels.SearchError" />
-
-        <variable
-            name="fragment"
-            type="com.ksainthi.swifty.fragments.FragmentHome" />
+            name="viewModel"
+            type="com.ksainthi.swifty.presentation.viewmodels.HomeViewModel" />
     </data>
 
     <LinearLayout
@@ -118,13 +114,13 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/alert"
                 android:padding="20dp"
-                android:visibility="@{searchError.isHidden ? View.GONE : View.VISIBLE }">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{searchError.text}"
+                    android:text=""
                     android:textColor="#FFA197" />
             </LinearLayout>
 

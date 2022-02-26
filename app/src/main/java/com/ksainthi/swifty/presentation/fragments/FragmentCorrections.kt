@@ -1,4 +1,4 @@
-package com.ksainthi.swifty.fragments
+package com.ksainthi.swifty.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

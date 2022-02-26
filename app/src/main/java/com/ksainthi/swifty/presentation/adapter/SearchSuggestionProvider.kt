@@ -1,4 +1,4 @@
-package com.ksainthi.swifty
+package com.ksainthi.swifty.presentation.adapter
 
 import android.content.SearchRecentSuggestionsProvider
 
@@ -9,7 +9,7 @@ class SearchSuggestionProvider : SearchRecentSuggestionsProvider() {
     }
 
     companion object {
-        const val AUTHORITY = "com.ksainthi.swifty.SearchSuggestionProvider"
+        const val AUTHORITY = "com.ksainthi.swifty.presentation.adapter.SearchSuggestionProvider"
         const val MODE = DATABASE_MODE_QUERIES
     }
 }

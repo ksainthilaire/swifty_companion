@@ -1,30 +1,30 @@
-package com.ksainthi.swifty.api
+package com.ksainthi.swifty.data.api
 
-import com.ksainthi.swifty.viewmodels.Token
-import com.ksainthi.swifty.viewmodels.User
-import retrofit2.Call
+import com.ksainthi.swifty.data.model.TokenResponse
+import com.ksainthi.swifty.data.model.UserPicturesResponse
+import com.ksainthi.swifty.data.model.UserResponse
+import retrofit2.Response
 import retrofit2.http.*
 
-
-interface Api42Service {
+interface Api42 {
 
     @POST("/oauth/token")
-    fun login(
+    suspend fun login(
         @Query("client_secret") clientSecret: String,
         @Query("client_id") clientId: String,
         @Query("grant_type") grantType: String = "client_credentials",
-    ) : Call<Token>
+    ) : Response<TokenResponse>
 
     @GET("/v2/users/{login}")
-    fun getUser(
+    suspend fun getUser(
         @Header("Authorization") token: String,
         @Path("login") login: String
-    ): Call<User>
+    ): Response<UserResponse>
 
     @GET("/v2/users")
-    fun getUsers(
+    suspend fun getUsers(
         @Header("Authorization") token: String,
         @Query("page[number]") page: Int
-    ) : Call<Array<User>>
+    ) : Response<List<UserResponse>>
 
 }

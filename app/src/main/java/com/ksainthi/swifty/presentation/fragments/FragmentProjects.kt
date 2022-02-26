@@ -1,4 +1,4 @@
-package com.ksainthi.swifty.fragments
+package com.ksainthi.swifty.presentation.fragments
 
 import android.os.Bundle
 import android.view.Gravity
@@ -10,11 +10,10 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import com.ksainthi.swifty.R
-import com.ksainthi.swifty.viewmodels.ProjectUser
-import com.ksainthi.swifty.viewmodels.User
+
 
 class FragmentProjects : Fragment() {
-
+/*
     private lateinit var user: User
     private var cursusId: Int = 0
 
@@ -216,5 +215,5 @@ class FragmentProjects : Fragment() {
         }
         return linearLayout
     }
-
+*/
 }
