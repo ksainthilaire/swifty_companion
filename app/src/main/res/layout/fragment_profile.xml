@@ -6,159 +6,153 @@
 
         <variable
             name="viewModel"
-            type="com.ksainthi.swifty.presentation.viewmodels.ProfileViewModel"></variable>
+            type="com.ksainthi.swifty.presentation.viewmodels.ProfileViewModel" />
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_centerInParent="true"
+                app:shapeAppearanceOverlay="@style/imageViewRounded" />
+
+            <ProgressBar
+                android:id="@+id/levelPercent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignStart="@+id/avatar"
+                android:layout_alignTop="@+id/avatar"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="-2dp"
+                android:background="@drawable/circle_shape"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="65"
+                android:progressDrawable="@drawable/circular_progress_bar" />
+        </RelativeLayout>
+
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_names_bg"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <RelativeLayout
-
+            <TextView
+                android:id="@+id/fullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:text="@{viewModel.user.fullName}"
+                android:textColor="@color/white" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
-                    android:layout_centerInParent="true"
-                    app:shapeAppearanceOverlay="@style/imageViewRounded" />
-
-                <ProgressBar
-                    android:id="@+id/levelPercent"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_alignLeft="@+id/avatar"
-                    android:layout_alignTop="@+id/avatar"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="-2dp"
-                    android:background="@drawable/circle_shape"
-                    android:indeterminate="false"
-                    android:max="100"
-                    android:progress="65"
-                    android:progressDrawable="@drawable/circular_progress_bar" />
-            </RelativeLayout>
-
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/user_names_bg"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:text="@{viewModel.user.login}"
+                android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/fullName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.user.fullName}"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.user.login}"
-                    android:textColor="@color/white" />
-                <TextView
-                    android:id="@+id/cursusLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{`Niv. `+viewModel.user.level}"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/tags"
+            <TextView
+                android:id="@+id/cursusLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/wallet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_tag_bg"
-                        android:padding="10dp"
-                        android:text="@{viewModel.user.wallet+` ₳`}" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cursusSpinnerWrapper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/user_tag_bg"
-                    android:layout_marginTop="10dp"
-                    android:paddingRight="10dp"
-                   >
-                    
-                    <Spinner
-                        android:id="@+id/cursusSpinner"
-                        android:background="@drawable/user_tag_bg"
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:selectedItemPosition="@={viewModel.selectedCursus}"
-                        android:layout_weight="1"></Spinner>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_display" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/correctionPoints"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_tag_bg"
-                        android:padding="10dp"
-                        android:text="@{` ⛅`}" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <com.google.android.material.tabs.TabLayout
-                app:tabTextAppearance="@style/ProfileTabLayout"
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:text="@{`Niv. `+viewModel.user.level}"
+                android:textColor="@color/white" />
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_tag_bg"
+                    android:padding="10dp"
+                    android:text="@{viewModel.user.wallet+` ₳`}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cursusSpinnerWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/user_tag_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp">
+
+                <Spinner
+                    android:id="@+id/cursusSpinner"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/user_tag_bg"
+                    android:selectedItemPosition="@={viewModel.selectedCursus}" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/empty"
+                    android:src="@drawable/ic_display" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/correctionPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_tag_bg"
+                    android:padding="10dp"
+                    android:text="@{` ⛅`}" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/ProfileTabLayout">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
+
 
 </layout>

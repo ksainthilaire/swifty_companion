@@ -16,13 +16,10 @@ data class   User constructor(
 ) : Parcelable {
 
     fun getLevelPercent(cursusId: Int): Int {
-        val level: Float = cursus?.filter { cursus -> cursus.id == cursusId }?.first()?.level ?: 0f 
+        val level: Float = cursus!!.first { cursus -> cursus.id == cursusId }.level
         val startLevel = level.toInt()
         return ((level - startLevel) * 100).toInt()
     }
 
-    fun getCursusNames(): List<String>?= cursus?.map { cursus -> cursus.name }
-    fun getCursusByName(cursusName: String): Cursus? = cursus?.filter { it.name == cursusName}?.firstOrNull()
-    fun getDefaultCursus(): Cursus? = getCursusByName("42cursus") ?: cursus?.first()
 }
 

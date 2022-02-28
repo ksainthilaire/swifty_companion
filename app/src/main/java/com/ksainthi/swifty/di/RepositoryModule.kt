@@ -2,8 +2,6 @@ package com.ksainthi.swifty.di
 
 import android.content.Context
 import android.content.res.Resources
-import android.renderscript.Matrix3f
-import android.util.Log
 import com.ksainthi.swifty.MainApplication
 import com.ksainthi.swifty.data.api.Api42
 import com.ksainthi.swifty.data.api.ApiService

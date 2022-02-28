@@ -1,7 +1,6 @@
 package com.ksainthi.swifty.data.api
 
 import com.ksainthi.swifty.data.model.TokenResponse
-import com.ksainthi.swifty.data.model.UserPicturesResponse
 import com.ksainthi.swifty.data.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.*

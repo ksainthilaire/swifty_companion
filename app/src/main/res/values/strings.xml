@@ -11,6 +11,14 @@
     <string name="search">Rechercher...</string>
     <string name="pagination">Page</string>
 
+    <string-array name="profile_tabs">
+        <item>Compétences</item>
+        <item>Projets</item>
+    </string-array>
+
+    <string name="default_picture_url">https://cdn.intra.42.fr/users/default.jpg</string>
+    <string name="profil_cursus_level">Niv. %s</string>
+
     <string name="hello_blank_fragment">test</string>
 
     <string name="skills_tab_item">Compétences</string>

@@ -21,10 +21,10 @@ class ProfileViewModel @Inject constructor(
 
     val user = MutableLiveData<User>()
     val cursusNames = MutableLiveData<List<String>>()
-    val selectedCursus = MutableLiveData<Int>(0)
+    val selectedCursus = MutableLiveData(0)
 
 
-    fun onUserProfileLoaded(result: ApiResult<User, Nothing>) {
+    private fun onUserProfileLoaded(result: ApiResult<User, Nothing>) {
         Log.d("TAG", "onUserProfileLoaded()")
         when (result) {
             is ApiResult.Success -> {
@@ -35,6 +35,8 @@ class ProfileViewModel @Inject constructor(
                 }
                 user.postValue(userFromRep!!)
             }
+
+            else -> {}
         }
     }
 
@@ -44,9 +46,6 @@ class ProfileViewModel @Inject constructor(
 
     fun getCurrentCursus(): Cursus? =
         user.value?.cursus?.get(selectedCursus.value!!)
-
-    fun getCursusNames(): List<String>? =
-        user.value?.cursus?.map { cursus -> cursus.name }
 
     fun refreshView() = userFromRep?.let { user.postValue(it) }
 

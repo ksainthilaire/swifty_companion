@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+    <data>
+        <variable name="viewModel" type="com.ksainthi.swifty.presentation.viewmodels.SkillViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/skillRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/skillTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{viewModel.name}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:gravity="right">
+        <ProgressBar
+
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="@{viewModel.progress}"
+          />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</layout>

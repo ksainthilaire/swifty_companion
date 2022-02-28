@@ -12,7 +12,6 @@ import com.ksainthi.swifty.domain.model.Token
 import com.ksainthi.swifty.domain.model.User
 import retrofit2.Response
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,6 +31,8 @@ class Repository @Inject constructor(
                 is ApiResult.Success -> {
                     token = result.data
                 }
+
+                else -> {}
             }
         }
     }

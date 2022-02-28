@@ -1,13 +1,11 @@
 package com.ksainthi.swifty.presentation.adapter
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ksainthi.swifty.domain.model.Cursus
-import com.ksainthi.swifty.domain.model.User
 import com.ksainthi.swifty.presentation.fragments.FragmentProjects
 import com.ksainthi.swifty.presentation.fragments.FragmentSkills
 
@@ -15,7 +13,7 @@ import com.ksainthi.swifty.presentation.fragments.FragmentSkills
 class ProfileViewAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
-    val cursus: Cursus
+    private val cursus: Cursus
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 

@@ -23,17 +23,17 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
     val homeModel = MutableLiveData<HomeState>()
 
 
-    fun refreshView() {
+    private fun refreshView() {
         homeModel.postValue(homeState)
     }
 
-    fun onUsersLoaded(result: ApiResult<List<User>, Nothing>)  {
-        when (result) {
+    private fun onUsersLoaded(result: ApiResult<List<User>, Nothing>)  {
+        homeState = when (result) {
             is ApiResult.Success -> {
-                homeState = HomeState( users = result.data,  error = ErrorState(isVisible = true, text = "Introdd  uvable!"))
+                HomeState( users = result.data,  error = ErrorState(isVisible = true, text = "Introdd  uvable!"))
             }
             is ApiResult.Error -> {
-                homeState = HomeState(
+                HomeState(
                     error = ErrorState(isVisible = true, text = "Introuvable!")
                 )
             }
@@ -41,16 +41,16 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
         refreshView()
     }
 
-    fun onUserLoaded(result: ApiResult<User, Nothing>) {
-        when (result) {
+    private fun onUserLoaded(result: ApiResult<User, Nothing>) {
+        homeState = when (result) {
             is ApiResult.Success -> {
-                homeState = HomeState(
+                HomeState(
                     step = Step.SWITCH_PROFILE
                 )
 
             }
             is ApiResult.Error -> {
-                homeState = HomeState(
+                HomeState(
                     error = ErrorState(isVisible = true, text = "Introuvable!")
                 )
 

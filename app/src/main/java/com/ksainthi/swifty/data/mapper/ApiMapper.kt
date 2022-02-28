@@ -1,6 +1,5 @@
 package com.ksainthi.swifty.data.mapper
 
-import android.util.Log
 import com.ksainthi.swifty.data.model.CursusUser
 import com.ksainthi.swifty.data.model.ProjectUser
 import com.ksainthi.swifty.data.model.TokenResponse
@@ -32,7 +31,7 @@ class ApiMapper @Inject constructor() {
                 )
             },
             projects = projects.filter { project -> project.cursusIds.contains(it.cursusId) }
-                .map { it ->
+                .map {
                     Project(
                         id = it.id,
                         parentId = it.project?.parentId,
@@ -51,10 +50,10 @@ class ApiMapper @Inject constructor() {
         login = "${user.login}",
         wallet = user.wallet,
         correctionPoints = user.correctionPoint,
-        cursus = if (user.cursus_users != null) consolidateUserCursus(
+        cursus = consolidateUserCursus(
             user.cursus_users,
             user.projectsUsers
-        ) else null
+        )
     )
 
 
